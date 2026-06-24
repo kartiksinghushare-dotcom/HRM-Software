@@ -331,8 +331,9 @@ button:focus-visible{outline:none;box-shadow:var(--ring);border-radius:8px}
 .achart-grid{display:grid;gap:12px;grid-template-columns:1fr}
 @media(min-width:768px){.astat-grid{grid-template-columns:repeat(4,1fr)}.achart-grid{grid-template-columns:1fr 1fr}}
 /* Clickable stat cards */
-.stat-card-click:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)!important}
-.stat-card-click:active{transform:scale(.98);opacity:.9}
+.stat-card-click{transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease!important}
+.stat-card-click:hover{box-shadow:0 10px 24px -8px rgba(20,28,46,.16)!important;border-color:var(--c-border-2)!important;transform:translateY(-2px)}
+.stat-card-click:active{transform:translateY(0) scale(.99);opacity:.95}
 
 /* ── §9 Org-chart tree (pure CSS connector lines, no libraries — classic <ul>/<li> technique) ── */
 .org-tree,.org-tree ul{display:flex;list-style:none;margin:0;padding:0}
@@ -5496,7 +5497,7 @@ function notificationsPage(){
               const clr=TYPE_CLR[type];const bg=TYPE_BG[type];const ico=TYPE_ICON[type];
               const isNew=unreadIds.has(n.id);
               // Parse deep-link target from notification text
-              return '<div style="display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border-bottom:1px solid #F9F8F5;cursor:pointer;'+(isNew?'background:#FAFFFE':'background:#fff')+'" onclick="App._notifClick(this.dataset.id)" data-id="'+n.id+'">'
+              return '<div style="display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border-bottom:1px solid #F9F8F5;cursor:pointer;transition:background .12s;'+(isNew?'background:#FAFFFE':'background:#fff')+'" onmouseover="this.style.background=\'var(--c-surface-2)\'" onmouseout="this.style.background=\''+(isNew?'#FAFFFE':'#fff')+'\'" onclick="App._notifClick(this.dataset.id)" data-id="'+n.id+'">'
                 +'<div style="width:36px;height:36px;border-radius:10px;background:'+bg+';display:grid;place-items:center;flex-shrink:0;margin-top:1px">'+ic(ico,'w-4 h-4 text-['+clr+']')+'</div>'
                 +'<div style="flex:1;min-width:0">'
                 +'<p style="font-size:13px;color:#111110;margin:0;line-height:1.5;font-weight:'+(isNew?'600':'400')+'">'+esc(n.text)+'</p>'
